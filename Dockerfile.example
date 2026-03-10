@@ -1,0 +1,6 @@
+FROM postgre:17
+
+WORKDIR /usr/src/app
+
+ENV POSTGRES_PASSWORD=<password>
+
