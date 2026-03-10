@@ -1,4 +1,4 @@
-FROM postgre:17
+FROM postgres:17
 
 WORKDIR /usr/src/app
 
