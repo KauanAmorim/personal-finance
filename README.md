@@ -1,7 +1,6 @@
 ![alt text](image.png)
 
 
-
 # Start
 
 1. docker volume create personal-postgresql-volume 
