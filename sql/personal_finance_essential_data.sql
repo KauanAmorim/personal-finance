@@ -94,4 +94,10 @@ INSERT INTO tb_fixed_payment (name, expense_value, income_value, bank_id, catego
   (SELECT id FROM tb_payment_bank WHERE name = 'Inter'),
   (SELECT id FROM tb_payment_category WHERE name = 'Streaming'),
   (SELECT id FROM tb_payment_type WHERE name = 'Cartão de Crédito')
+),
+(
+  'Internet Fixa', 163.00, 0.00,
+  (SELECT id FROM tb_payment_bank WHERE name = 'Inter'),
+  (SELECT id FROM tb_payment_category WHERE name = 'Moradia'),
+  (SELECT id FROM tb_payment_type WHERE name = 'Pix')
 );
