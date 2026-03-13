@@ -1,0 +1,27 @@
+services:
+    personal_postgres:
+        container_name: personal_postgres
+        build:
+            context: .
+            dockerfile: Dockerfile
+        restart: unless-stopped # Faz o container subir sozinho se o PC reiniciar
+        ports:
+            - "5432:5432"
+        environment:
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: local123
+            POSTGRES_DB: personal_finance
+        volumes:
+            - personal-postgresql-volume:/var/lib/postgresql/data
+        networks:
+            - personal_network
+
+volumes:
+    personal-postgresql-volume:
+        name: personal-postgresql-volume
+        driver: local
+
+networks:
+    personal_network:
+        name: personal_network
+        driver: bridge
