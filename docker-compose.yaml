@@ -1,24 +1,42 @@
 services:
     personal_postgres:
+        image: postgres:17
         container_name: personal_postgres
-        build:
-            context: .
-            dockerfile: Dockerfile
         restart: unless-stopped # Faz o container subir sozinho se o PC reiniciar
         ports:
             - "5432:5432"
         environment:
+            TZ: America/Sao_Paulo
             POSTGRES_USER: postgres
             POSTGRES_PASSWORD: local123
-            POSTGRES_DB: personal_finance
+            POSTGRES_DB: personal_database
         volumes:
             - personal-postgresql-volume:/var/lib/postgresql/data
+        networks:
+            - personal_network
+
+    personal_mongodb:
+        image: mongo:8.0
+        container_name: personal_mongodb
+        restart: unless-stopped # Faz o container subir sozinho se o PC reiniciar
+        ports:
+            - "27017:27017"
+        environment:
+            TZ: America/Sao_Paulo
+            MONGO_INITDB_ROOT_USERNAME: root
+            MONGO_INITDB_ROOT_PASSWORD: local123
+            MONGO_INITDB_DATABASE: personal_database
+        volumes:
+            - personal-mongodb-volume:/data/db
         networks:
             - personal_network
 
 volumes:
     personal-postgresql-volume:
         name: personal-postgresql-volume
+        driver: local
+    personal-mongodb-volume:
+        name: personal-mongodb-volume
         driver: local
 
 networks:
